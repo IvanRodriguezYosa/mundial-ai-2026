@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Partidos from "./pages/Partidos";
 import Grupos from "./pages/Grupos";
 import Goleadores from "./pages/Goleadores";
+import Pronosticos from "./pages/Pronosticos";
 
 /**
  * App component - Root of the application
@@ -17,14 +18,12 @@ import Goleadores from "./pages/Goleadores";
 function App() {
   return (
     <BrowserRouter>
-      {/* Navbar is always visible on every page */}
       <Navbar />
-
-      {/* Routes define which page renders for each URL */}
       <Routes>
         <Route path="/" element={<Partidos />} />
         <Route path="/grupos" element={<Grupos />} />
         <Route path="/goleadores" element={<Goleadores />} />
+        <Route path="/pronosticos" element={<Pronosticos />} />
       </Routes>
     </BrowserRouter>
   );

@@ -55,4 +55,22 @@ def obtener_estadisticas():
         "promedio_goles": round(total_goles / len(jugados), 2) if jugados else 0,
         "goleador_lider": GOLEADORES[0]["nombre"] if GOLEADORES else None,
     }
+
+from app.ia_service import pronosticar_partido
+
+@router.get("/pronostico/{equipo_a}/{equipo_b}")
+def obtener_pronostico(equipo_a: str, equipo_b: str):
+    """
+    Generates an AI-powered match prediction between two teams.
+    Uses Claude API to analyze and predict match outcome.
+    
+    Args:
+        equipo_a: Home team name
+        equipo_b: Away team name
+    
+    Returns:
+        dict with predicted score, scorer, corners, cards and analysis
+    """
+    resultado = pronosticar_partido(equipo_a, equipo_b)
+    return resultado
     
