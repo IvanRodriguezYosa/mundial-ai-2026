@@ -31,7 +31,6 @@ function Goleadores() {
         setLoading(false);
       }
     };
-
     fetchGoleadores();
   }, []);
 
@@ -52,8 +51,12 @@ function Goleadores() {
               {index + 1}
             </div>
 
-            {/* Flag */}
-            <div className="scorer-flag">{goleador.bandera}</div>
+            {/* Country flag from flagcdn */}
+            <img
+              src={`https://flagcdn.com/w40/${goleador.bandera}.png`}
+              alt={goleador.equipo}
+              style={{width:"32px", height:"22px", borderRadius:"4px", objectFit:"cover", flexShrink: 0}}
+            />
 
             {/* Player info */}
             <div className="scorer-info">

@@ -31,7 +31,6 @@ function Grupos() {
         setLoading(false);
       }
     };
-
     fetchGrupos();
   }, []);
 
@@ -67,7 +66,12 @@ function Grupos() {
                     <td>
                       {/* Green bar indicates qualified teams (top 2) */}
                       <span className={`qualify-indicator ${i < 2 ? "q" : "e"}`}></span>
-                      {equipo.bandera} {equipo.nombre}
+                      <img
+                        src={`https://flagcdn.com/w40/${equipo.bandera}.png`}
+                        alt={equipo.nombre}
+                        style={{width:"24px", height:"16px", borderRadius:"2px", objectFit:"cover", marginRight:"8px", verticalAlign:"middle"}}
+                      />
+                      {equipo.nombre}
                     </td>
                     <td>{equipo.jugados}</td>
                     <td>{equipo.ganados}</td>

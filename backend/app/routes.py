@@ -15,9 +15,15 @@ router = APIRouter()
 def obtener_partidos():
     """
     Returns the complete list of World Cup matches.
-    Includes finished, live, and upcoming matches.
+    Flag codes are converted to lowercase for frontend compatibility.
     """
-    return PARTIDOS
+    partidos = []
+    for p in PARTIDOS:
+        partido = p.copy()
+        partido["bandera_a"] = p["bandera_a"].lower()
+        partido["bandera_b"] = p["bandera_b"].lower()
+        partidos.append(partido)
+    return partidos
 
 @router.get("/grupos", response_model=list[Grupo])
 def obtener_grupos():
