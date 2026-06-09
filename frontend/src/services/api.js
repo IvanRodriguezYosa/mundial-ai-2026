@@ -5,7 +5,7 @@
  */
 
 // Base URL for the backend - in development points to local FastAPI
-const BASE_URL = "http://127.0.0.1:8000/api";
+const BASE_URL = "https://mundial-ai-2026.onrender.com/api";
 /**
  * Fetches all World Cup matches
  * @returns {Promise<Array>} List of matches
