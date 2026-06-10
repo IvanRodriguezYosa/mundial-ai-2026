@@ -17,7 +17,10 @@ app = FastAPI(
 #Without this, the browser would block the requests.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"], #vite/react port
+    allow_origins=[
+    "http://localhost:5173",
+    "https://mundial-ai-2026.vercel.app"
+    ], 
     allow_methods=["*"],
     allow_headers=["*"],
 )
