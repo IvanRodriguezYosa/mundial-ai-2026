@@ -64,7 +64,11 @@ const formatearFecha = (fechaISO) => {
       {/* Score and status */}
       <div className="score-box">
         <div className="score">{scoreDisplay}</div>
-        <div className="match-meta">{formatearFecha(partido.fecha)}</div>
+        <div className="match-meta">
+          {partido.estado === "IN_PLAY" && partido.minuto
+            ? `⏱️ ${partido.minuto}'`
+            : formatearFecha(partido.fecha)}
+        </div>
         <div style={{ marginTop: "6px" }}>{getBadge()}</div>
       </div>
 

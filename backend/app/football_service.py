@@ -13,6 +13,7 @@ load_dotenv()
 FOOTBALL_API_BASE = "https://api.football-data.org/v4"
 HEADERS = {"X-Auth-Token": os.getenv("FOOTBALL_API_KEY")}
 
+
 async def get_partidos():
     """Fetches all World Cup 2026 matches from the external API"""
     async with httpx.AsyncClient() as client:
@@ -37,4 +38,5 @@ def transformar_partido(match):
         "grupo": match.get("group", ""),
         "bandera_a": (match["homeTeam"].get("tla") or "").lower(),
         "bandera_b": (match["awayTeam"].get("tla") or "").lower(),
+        "minuto": match.get("minute", None),
     }
