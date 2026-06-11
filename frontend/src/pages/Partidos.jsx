@@ -4,9 +4,9 @@
  * Groups matches by status: live, finished and upcoming.
  */
 
-import { useState, useEffect } from "react";
-import { getPartidos } from "../services/api";
-import PartidoCard from "../components/PartidoCard";
+const enVivo = partidos.filter((p) => p.estado === "IN_PLAY");
+const finalizados = partidos.filter((p) => p.estado === "FINISHED");
+const proximos = partidos.filter((p) => p.estado === "TIMED" || p.estado === "SCHEDULED");
 
 /**
  * Partidos page component
