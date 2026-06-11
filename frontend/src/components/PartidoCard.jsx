@@ -34,6 +34,18 @@ function PartidoCard({ partido }) {
     return <span className="badge badge-upcoming">PRÓXIMO</span>;
   };
 
+  // Formats ISO date to readable format: "11 Jun · 19:00"
+const formatearFecha = (fechaISO) => {
+  const fecha = new Date(fechaISO);
+  return fecha.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "America/Bogota"
+  });
+};
+
   return (
     <div className={`match-card ${partido.estado}`}>
       {/* Home team */}
@@ -52,7 +64,7 @@ function PartidoCard({ partido }) {
       {/* Score and status */}
       <div className="score-box">
         <div className="score">{scoreDisplay}</div>
-        <div className="match-meta">{partido.fecha}</div>
+        <div className="match-meta">{formatearFecha(partido.fecha)}</div>
         <div style={{ marginTop: "6px" }}>{getBadge()}</div>
       </div>
 
