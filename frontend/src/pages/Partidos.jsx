@@ -4,24 +4,15 @@
  * Groups matches by status: live, finished and upcoming.
  */
 
-const enVivo = partidos.filter((p) => p.estado === "IN_PLAY");
-const finalizados = partidos.filter((p) => p.estado === "FINISHED");
-const proximos = partidos.filter((p) => p.estado === "TIMED" || p.estado === "SCHEDULED");
+import { useState, useEffect } from "react";
+import { getPartidos } from "../services/api";
+import PartidoCard from "../components/PartidoCard";
 
-/**
- * Partidos page component
- * @returns {JSX.Element} Full matches page
- */
 function Partidos() {
-  // State to store matches data from the API
   const [partidos, setPartidos] = useState([]);
-  // State to handle loading status
   const [loading, setLoading] = useState(true);
-  // State to handle errors
   const [error, setError] = useState(null);
 
-  // useEffect runs when the component mounts
-  // Fetches matches from the backend API
   useEffect(() => {
     const fetchPartidos = async () => {
       try {
@@ -35,19 +26,18 @@ function Partidos() {
     };
 
     fetchPartidos();
-  }, []); // Empty array means: run only once when component mounts
+  }, []);
 
   if (loading) return <div className="loading">⚽ Cargando partidos...</div>;
   if (error) return <div className="error">{error}</div>;
 
   // Filter matches by status
-  const enVivo = partidos.filter((p) => p.estado === "live");
-  const finalizados = partidos.filter((p) => p.estado === "finished");
-  const proximos = partidos.filter((p) => p.estado === "upcoming");
+  const enVivo = partidos.filter((p) => p.estado === "IN_PLAY");
+  const finalizados = partidos.filter((p) => p.estado === "FINISHED");
+  const proximos = partidos.filter((p) => p.estado === "TIMED" || p.estado === "SCHEDULED");
 
   return (
     <div className="page">
-      {/* Live matches section */}
       {enVivo.length > 0 && (
         <section>
           <h2 className="section-title">🔴 En Vivo</h2>
@@ -59,7 +49,6 @@ function Partidos() {
         </section>
       )}
 
-      {/* Upcoming matches section */}
       {proximos.length > 0 && (
         <section>
           <h2 className="section-title">🕐 Próximos Partidos</h2>
@@ -71,7 +60,6 @@ function Partidos() {
         </section>
       )}
 
-      {/* Finished matches section */}
       {finalizados.length > 0 && (
         <section>
           <h2 className="section-title">✅ Finalizados</h2>
