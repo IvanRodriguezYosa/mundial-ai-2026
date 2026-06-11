@@ -7,23 +7,18 @@ Each function is an endpoint that responds to an HTTP request.
 from fastapi import APIRouter
 from app.data import PARTIDOS, GRUPOS, GOLEADORES
 from app.models import Partido, Grupo, Goleador
+from app.football_service import get_partidos
 
 #APIRouter organizes all application routes.
 router = APIRouter()
 
-@router.get("/partidos", response_model=list[Partido])
-def obtener_partidos():
+@router.get("/partidos")
+async def obtener_partidos():
     """
-    Returns the complete list of World Cup matches.
-    Flag codes are converted to lowercase for frontend compatibility.
+    Returns the complete list of World Cup matches from football-data.org
     """
-    partidos = []
-    for p in PARTIDOS:
-        partido = p.copy()
-        partido["bandera_a"] = p["bandera_a"].lower()
-        partido["bandera_b"] = p["bandera_b"].lower()
-        partidos.append(partido)
-    return partidos
+    matches = await get_partidos()
+    return matches
 
 @router.get("/grupos", response_model=list[Grupo])
 def obtener_grupos():
