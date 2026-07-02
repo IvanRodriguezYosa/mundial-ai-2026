@@ -11,18 +11,30 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 // List of available teams for prediction
 const EQUIPOS = [
-  { nombre: "Brasil", bandera: "🇧🇷" },
+  { nombre: "Mexico", bandera: "🇲🇽" },
+  { nombre: "Brazil", bandera: "🇧🇷" },
   { nombre: "Argentina", bandera: "🇦🇷" },
-  { nombre: "Francia", bandera: "🇫🇷" },
-  { nombre: "España", bandera: "🇪🇸" },
-  { nombre: "Alemania", bandera: "🇩🇪" },
-  { nombre: "Inglaterra", bandera: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+  { nombre: "France", bandera: "🇫🇷" },
+  { nombre: "Spain", bandera: "🇪🇸" },
+  { nombre: "Germany", bandera: "🇩🇪" },
+  { nombre: "England", bandera: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
   { nombre: "Portugal", bandera: "🇵🇹" },
   { nombre: "Colombia", bandera: "🇨🇴" },
-  { nombre: "Mexico", bandera: "🇲🇽" },
   { nombre: "Netherlands", bandera: "🇳🇱" },
   { nombre: "Morocco", bandera: "🇲🇦" },
   { nombre: "United States", bandera: "🇺🇸" },
+  { nombre: "Switzerland", bandera: "🇨🇭" },
+  { nombre: "Paraguay", bandera: "🇵🇾" },
+  { nombre: "Norway", bandera: "🇳🇴" },
+  { nombre: "Belgium", bandera: "🇧🇪" },
+  { nombre: "Australia", bandera: "🇦🇺" },
+  { nombre: "Algeria", bandera: "🇩🇿" },
+  { nombre: "South Africa", bandera: "🇿🇦" },
+  { nombre: "Canada", bandera: "🇨🇦" },
+  { nombre: "Egypt", bandera: "🇪🇬" },
+  { nombre: "Ghana", bandera: "🇬🇭" },
+  { nombre: "Croatia", bandera: "🇭🇷" },
+  { nombre: "Cape Verde Islands", bandera: "🇨🇻" },
 ];
 
 /**
