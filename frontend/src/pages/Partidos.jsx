@@ -63,18 +63,22 @@ function Partidos() {
 
   // Order in which stages should appear
 // Order stages by most current first - stages with upcoming/live matches appear first
+// Order stages by the nearest upcoming match date
 const ordenFases = [
   "FINAL",
-  "THIRD_PLACE",
+  "THIRD_PLACE", 
   "SEMI_FINALS",
   "QUARTER_FINALS",
   "LAST_16",
   "LAST_32",
   "GROUP_STAGE",
 ].sort((a, b) => {
-  const tieneActivosA = porFase[a]?.some(p => p.estado === "TIMED" || p.estado === "IN_PLAY") ? 1 : 0;
-  const tieneActivosB = porFase[b]?.some(p => p.estado === "TIMED" || p.estado === "IN_PLAY") ? 1 : 0;
-  return tieneActivosB - tieneActivosA;
+  const proximoA = porFase[a]?.find(p => p.estado === "TIMED");
+  const proximoB = porFase[b]?.find(p => p.estado === "TIMED");
+  if (!proximoA && !proximoB) return 0;
+  if (!proximoA) return 1;
+  if (!proximoB) return -1;
+  return new Date(proximoA.fecha) - new Date(proximoB.fecha);
 });
 
   return (
