@@ -6,6 +6,9 @@
 
 import { useState } from "react";
 
+// Base URL for the backend API
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 // List of available teams for prediction
 const EQUIPOS = [
   { nombre: "Brasil", bandera: "🇧🇷" },
@@ -16,6 +19,10 @@ const EQUIPOS = [
   { nombre: "Inglaterra", bandera: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
   { nombre: "Portugal", bandera: "🇵🇹" },
   { nombre: "Colombia", bandera: "🇨🇴" },
+  { nombre: "Mexico", bandera: "🇲🇽" },
+  { nombre: "Netherlands", bandera: "🇳🇱" },
+  { nombre: "Morocco", bandera: "🇲🇦" },
+  { nombre: "United States", bandera: "🇺🇸" },
 ];
 
 /**
@@ -29,12 +36,7 @@ function Pronosticos() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  /**
-   * Fetches AI prediction from the backend
-   * Validates that two different teams are selected before calling API
-   */
   const obtenerPronostico = async () => {
-    // Validate team selection
     if (!equipoA || !equipoB || equipoA === equipoB) {
       setError("Selecciona dos equipos diferentes");
       return;
@@ -46,7 +48,7 @@ function Pronosticos() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/pronostico/${equipoA}/${equipoB}`
+        `${BASE_URL}/pronostico/${equipoA}/${equipoB}`
       );
       if (!response.ok) throw new Error("Error al obtener pronóstico");
       const data = await response.json();
@@ -58,7 +60,6 @@ function Pronosticos() {
     }
   };
 
-  // Get flag emoji for a team name
   const getFlag = (nombre) =>
     EQUIPOS.find((e) => e.nombre === nombre)?.bandera || "🏳️";
 
