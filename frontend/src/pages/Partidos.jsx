@@ -51,15 +51,24 @@ function Partidos() {
   // Separate live matches from the rest
   const enVivo = partidos.filter((p) => p.estado === "IN_PLAY");
 
-  // Group remaining matches by stage
-  const porFase = partidos
-    .filter((p) => p.estado !== "IN_PLAY")
-    .reduce((acc, partido) => {
-      const fase = partido.stage || "GROUP_STAGE";
-      if (!acc[fase]) acc[fase] = [];
-      acc[fase].push(partido);
-      return acc;
-    }, {});
+// Group remaining matches by stage
+const porFase = partidos
+  .filter((p) => p.estado !== "IN_PLAY")
+  .reduce((acc, partido) => {
+    const fase = partido.stage || "GROUP_STAGE";
+    if (!acc[fase]) acc[fase] = [];
+    acc[fase].push(partido);
+    return acc;
+  }, {});
+
+// Within each stage, sort: upcoming first, then finished
+Object.keys(porFase).forEach((fase) => {
+  porFase[fase].sort((a, b) => {
+    if (a.estado === "TIMED" && b.estado !== "TIMED") return -1;
+    if (a.estado !== "TIMED" && b.estado === "TIMED") return 1;
+    return new Date(a.fecha) - new Date(b.fecha);
+  });
+});
 
   // Order in which stages should appear
 // Order stages by most current first - stages with upcoming/live matches appear first
