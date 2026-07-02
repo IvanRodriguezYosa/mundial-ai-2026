@@ -13,7 +13,7 @@ function Partidos() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+useEffect(() => {
     const fetchPartidos = async () => {
       try {
         const data = await getPartidos();
@@ -25,7 +25,13 @@ function Partidos() {
       }
     };
 
-    fetchPartidos();
+    fetchPartidos(); // Run immediately on mount
+
+    // Poll every 60 seconds for updated match data
+    const intervalo = setInterval(fetchPartidos, 60000);
+
+    // Cleanup: stop polling when component unmounts
+    return () => clearInterval(intervalo);
   }, []);
 
   if (loading) return <div className="loading">⚽ Cargando partidos...</div>;
