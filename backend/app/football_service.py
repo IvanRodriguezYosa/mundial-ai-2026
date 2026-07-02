@@ -24,6 +24,7 @@ def transformar_partido(match):
         "estado": match["status"],
         "fecha": match["utcDate"],
         "grupo": match.get("group", ""),
+        "stage": match.get("stage", ""),
         "bandera_a": (match["homeTeam"].get("tla") or "").lower(),
         "bandera_b": (match["awayTeam"].get("tla") or "").lower(),
         "minuto": match.get("minute", None),
