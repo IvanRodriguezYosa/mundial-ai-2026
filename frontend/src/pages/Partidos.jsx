@@ -62,15 +62,20 @@ function Partidos() {
     }, {});
 
   // Order in which stages should appear
-  const ordenFases = [
-    "FINAL",
-    "THIRD_PLACE",
-    "SEMI_FINALS",
-    "QUARTER_FINALS",
-    "LAST_16",
-    "LAST_32",
-    "GROUP_STAGE",
-  ];
+// Order stages by most current first - stages with upcoming/live matches appear first
+const ordenFases = [
+  "FINAL",
+  "THIRD_PLACE",
+  "SEMI_FINALS",
+  "QUARTER_FINALS",
+  "LAST_16",
+  "LAST_32",
+  "GROUP_STAGE",
+].sort((a, b) => {
+  const tieneActivosA = porFase[a]?.some(p => p.estado === "TIMED" || p.estado === "IN_PLAY") ? 1 : 0;
+  const tieneActivosB = porFase[b]?.some(p => p.estado === "TIMED" || p.estado === "IN_PLAY") ? 1 : 0;
+  return tieneActivosB - tieneActivosA;
+});
 
   return (
     <div className="page">
