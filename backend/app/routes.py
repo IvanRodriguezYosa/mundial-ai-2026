@@ -8,6 +8,7 @@ from fastapi import APIRouter
 from app.data import PARTIDOS, GRUPOS, GOLEADORES
 from app.models import Partido, Grupo, Goleador
 from app.football_service import get_partidos
+from app.football_service import get_partidos, get_grupos
 
 #APIRouter organizes all application routes.
 router = APIRouter()
@@ -20,13 +21,14 @@ async def obtener_partidos():
     matches = await get_partidos()
     return matches
 
-@router.get("/grupos", response_model=list[Grupo])
-def obtener_grupos():
+
+@router.get("/grupos")
+async def obtener_grupos():
     """
-    Returns the standings table for all groups.
-    Teams are sorted by points in descending order.
+    Returns World Cup 2026 group standings from football-data.org
     """
-    return GRUPOS
+    grupos = await get_grupos()
+    return grupos
 
 @router.get("/goleadores", response_model=list[Goleador])
 def obtener_goleadores():

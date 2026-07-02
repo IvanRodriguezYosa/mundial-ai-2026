@@ -11,6 +11,20 @@ import { getGrupos } from "../services/api";
  * Grupos page component
  * @returns {JSX.Element} Full groups standings page
  */
+
+const TLA_TO_ISO = {
+  mex: "mx", rsa: "za", kor: "kr", cze: "cz", can: "ca", bih: "ba",
+  usa: "us", par: "py", qat: "qa", sui: "ch", bra: "br", mar: "ma",
+  hai: "ht", sco: "gb-sct", aus: "au", tur: "tr", ger: "de", cuw: "cw",
+  ned: "nl", jpn: "jp", civ: "ci", ecu: "ec", swe: "se", tun: "tn",
+  esp: "es", cpv: "cv", bel: "be", egy: "eg", ksa: "sa", ury: "uy",
+  irn: "ir", nzl: "nz", fra: "fr", sen: "sn", irq: "iq", nor: "no",
+  arg: "ar", alg: "dz", aut: "at", jor: "jo", por: "pt", cod: "cd",
+  eng: "gb-eng", cro: "hr", gha: "gh", pan: "pa", uzb: "uz", col: "co",
+  wal: "gb-wls", srb: "rs", cmr: "cm", chn: "cn", ven: "ve", per: "pe",
+  uru: "uy", mli: "ml", tha: "th",
+};
+
 function Grupos() {
   // State to store groups data from the API
   const [grupos, setGrupos] = useState([]);
@@ -44,7 +58,7 @@ function Grupos() {
         {grupos.map((grupo, index) => (
           <div key={index} className="group-card">
             {/* Group header */}
-            <div className="group-header">{grupo.nombre}</div>
+            <div className="group-header">{grupo.grupo}</div>
 
             {/* Standings table */}
             <table className="standings-table">
@@ -67,7 +81,7 @@ function Grupos() {
                       {/* Green bar indicates qualified teams (top 2) */}
                       <span className={`qualify-indicator ${i < 2 ? "q" : "e"}`}></span>
                       <img
-                        src={`https://flagcdn.com/w40/${equipo.bandera}.png`}
+                        src={`https://flagcdn.com/w40/${TLA_TO_ISO[equipo.bandera] || equipo.bandera}.png`}
                         alt={equipo.nombre}
                         style={{width:"24px", height:"16px", borderRadius:"2px", objectFit:"cover", marginRight:"8px", verticalAlign:"middle"}}
                       />
