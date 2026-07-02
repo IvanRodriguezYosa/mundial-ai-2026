@@ -9,6 +9,7 @@ from app.data import PARTIDOS, GRUPOS, GOLEADORES
 from app.models import Partido, Grupo, Goleador
 from app.football_service import get_partidos
 from app.football_service import get_partidos, get_grupos
+from app.football_service import get_partidos, get_grupos, get_goleadores
 
 #APIRouter organizes all application routes.
 router = APIRouter()
@@ -30,13 +31,13 @@ async def obtener_grupos():
     grupos = await get_grupos()
     return grupos
 
-@router.get("/goleadores", response_model=list[Goleador])
-def obtener_goleadores():
+@router.get("/goleadores")
+async def obtener_goleadores():
     """
-    Returns the tournament top scorers ranking.
-    Sorted by goals scored in descending order.
+    Returns World Cup 2026 top scorers from football-data.org
     """
-    return sorted(GOLEADORES, key=lambda x: x["goles"], reverse=True)
+    goleadores = await get_goleadores()
+    return goleadores
 
 @router.get("/estadisticas")
 def obtener_estadisticas():

@@ -76,3 +76,26 @@ async def get_grupos():
         response.raise_for_status()
         data = response.json()
         return [transformar_grupo(s) for s in data["standings"]]
+    
+
+def transformar_goleador(scorer):
+    """Transforms a scorer from football-data.org format to our app format"""
+    return {
+        "nombre": scorer["player"]["name"],
+        "equipo": scorer["team"]["name"],
+        "bandera": (scorer["team"].get("tla") or "").lower(),
+        "goles": scorer["goals"],
+        "asistencias": scorer.get("assists", 0) or 0,
+        "partidos": scorer.get("playedMatches", 0) or 0,
+    }
+
+async def get_goleadores():
+    """Fetches World Cup 2026 top scorers from the external API"""
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"{FOOTBALL_API_BASE}/competitions/WC/scorers",
+            headers=HEADERS
+        )
+        response.raise_for_status()
+        data = response.json()
+        return [transformar_goleador(s) for s in data["scorers"]]

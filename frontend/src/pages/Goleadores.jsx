@@ -11,6 +11,20 @@ import { getGoleadores } from "../services/api";
  * Goleadores page component
  * @returns {JSX.Element} Full top scorers page
  */
+
+const TLA_TO_ISO = {
+  mex: "mx", rsa: "za", kor: "kr", cze: "cz", can: "ca", bih: "ba",
+  usa: "us", par: "py", qat: "qa", sui: "ch", bra: "br", mar: "ma",
+  hai: "ht", sco: "gb-sct", aus: "au", tur: "tr", ger: "de", cuw: "cw",
+  ned: "nl", jpn: "jp", civ: "ci", ecu: "ec", swe: "se", tun: "tn",
+  esp: "es", cpv: "cv", bel: "be", egy: "eg", ksa: "sa", ury: "uy",
+  irn: "ir", nzl: "nz", fra: "fr", sen: "sn", irq: "iq", nor: "no",
+  arg: "ar", alg: "dz", aut: "at", jor: "jo", por: "pt", cod: "cd",
+  eng: "gb-eng", cro: "hr", gha: "gh", pan: "pa", uzb: "uz", col: "co",
+  wal: "gb-wls", srb: "rs", cmr: "cm", chn: "cn", ven: "ve", per: "pe",
+  uru: "uy", mli: "ml", tha: "th",
+};
+
 function Goleadores() {
   // State to store scorers data from the API
   const [goleadores, setGoleadores] = useState([]);
@@ -53,8 +67,7 @@ function Goleadores() {
 
             {/* Country flag from flagcdn */}
             <img
-              src={`https://flagcdn.com/w40/${goleador.bandera}.png`}
-              alt={goleador.equipo}
+              src={`https://flagcdn.com/w40/${TLA_TO_ISO[goleador.bandera] || goleador.bandera}.png`}              alt={goleador.equipo}
               style={{width:"32px", height:"22px", borderRadius:"4px", objectFit:"cover", flexShrink: 0}}
             />
 
