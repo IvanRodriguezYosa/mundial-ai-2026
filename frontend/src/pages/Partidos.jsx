@@ -11,9 +11,10 @@ import PartidoCard from "../components/PartidoCard";
 // Maps API stage values to readable Spanish labels
 const STAGE_LABELS = {
   GROUP_STAGE: "📋 Fase de Grupos",
-  LAST_16: "⚔️ Octavos de Final",
+  LAST_32: "⚔️ 16avos de Final",
+  LAST_16: "🔥 Octavos de Final",
   QUARTER_FINALS: "🏆 Cuartos de Final",
-  SEMI_FINALS: "🔥 Semifinales",
+  SEMI_FINALS: "🌟 Semifinales",
   THIRD_PLACE: "🥉 Tercer Puesto",
   FINAL: "🏆 Final",
 };
@@ -67,6 +68,7 @@ function Partidos() {
     "SEMI_FINALS",
     "QUARTER_FINALS",
     "LAST_16",
+    "LAST_32",
     "GROUP_STAGE",
   ];
 
