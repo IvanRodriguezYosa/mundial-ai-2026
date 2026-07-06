@@ -491,7 +491,7 @@
 }
 
 /* ══════════════════════════════════════
-   RESPONSIVE — small screens
+   RESPONSIVE — Pantallas pequeñas
    ══════════════════════════════════════ */
 
 @media (max-width: 768px) {
@@ -522,44 +522,42 @@
     gap: 20px;
   }
 
-  /* Match card — apila verticalmente en celular */
+  /* Match card — mantiene estructura horizontal pero más compacta */
+  .match-card {
+    grid-template-columns: 1fr auto 1fr;
+    padding: 12px;
+    gap: 8px;
+  }
 
-  /* Match card en celular — mantiene la estructura horizontal */
-.match-card {
-  grid-template-columns: 1fr auto 1fr;
-  padding: 12px;
-  gap: 8px;
-}
+  .team {
+    gap: 6px;
+  }
 
-.team {
-  gap: 6px;
-}
+  .team.right {
+    flex-direction: row-reverse;
+  }
 
-.team.right {
-  flex-direction: row-reverse;
-}
+  .team-name {
+    font-size: 12px;
+  }
 
-.team-name {
-  font-size: 12px;
-}
+  .team-group {
+    font-size: 10px;
+  }
 
-.team-group {
-  font-size: 10px;
-}
+  .score {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
 
-.score {
-  font-size: 24px;
-  letter-spacing: 2px;
-}
+  .score-box {
+    min-width: 80px;
+  }
 
-.score-box {
-  min-width: 80px;
-}
-
-.match-card img {
-  width: 28px;
-  height: 20px;
-}
+  .match-card img {
+    width: 28px;
+    height: 20px;
+  }
 
   /* Groups */
   .group-grid {
@@ -568,7 +566,7 @@
 
   /* Scorers */
   .scorer-bar {
-    display: none; /* Oculta la barra en celular */
+    display: none;
   }
 
   /* Predictions */
