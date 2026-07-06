@@ -5,42 +5,23 @@
  */
 
 import { useState } from "react";
+import EquipoSelector from "../components/EquipoSelector";
 
 // Base URL for the backend API
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-// List of available teams for prediction
-const EQUIPOS = [
-  { nombre: "Mexico", bandera: "🇲🇽" },
-  { nombre: "Brazil", bandera: "🇧🇷" },
-  { nombre: "Argentina", bandera: "🇦🇷" },
-  { nombre: "France", bandera: "🇫🇷" },
-  { nombre: "Spain", bandera: "🇪🇸" },
-  { nombre: "Germany", bandera: "🇩🇪" },
-  { nombre: "England", bandera: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
-  { nombre: "Portugal", bandera: "🇵🇹" },
-  { nombre: "Colombia", bandera: "🇨🇴" },
-  { nombre: "Netherlands", bandera: "🇳🇱" },
-  { nombre: "Morocco", bandera: "🇲🇦" },
-  { nombre: "United States", bandera: "🇺🇸" },
-  { nombre: "Switzerland", bandera: "🇨🇭" },
-  { nombre: "Paraguay", bandera: "🇵🇾" },
-  { nombre: "Norway", bandera: "🇳🇴" },
-  { nombre: "Belgium", bandera: "🇧🇪" },
-  { nombre: "Australia", bandera: "🇦🇺" },
-  { nombre: "Algeria", bandera: "🇩🇿" },
-  { nombre: "South Africa", bandera: "🇿🇦" },
-  { nombre: "Canada", bandera: "🇨🇦" },
-  { nombre: "Egypt", bandera: "🇪🇬" },
-  { nombre: "Ghana", bandera: "🇬🇭" },
-  { nombre: "Croatia", bandera: "🇭🇷" },
-  { nombre: "Cape Verde Islands", bandera: "🇨🇻" },
-];
+// Maps team names to ISO flag codes for the result display
+const TEAM_FLAGS = {
+  "Mexico": "mx", "Brazil": "br", "Argentina": "ar",
+  "France": "fr", "Spain": "es", "Germany": "de",
+  "England": "gb-eng", "Portugal": "pt", "Colombia": "co",
+  "Netherlands": "nl", "Morocco": "ma", "United States": "us",
+  "Switzerland": "ch", "Paraguay": "py", "Norway": "no",
+  "Belgium": "be", "Australia": "au", "Algeria": "dz",
+  "South Africa": "za", "Canada": "ca", "Egypt": "eg",
+  "Ghana": "gh", "Croatia": "hr", "Cape Verde Islands": "cv",
+};
 
-/**
- * Pronosticos page component
- * @returns {JSX.Element} Full AI predictions page
- */
 function Pronosticos() {
   const [equipoA, setEquipoA] = useState("");
   const [equipoB, setEquipoB] = useState("");
@@ -72,9 +53,6 @@ function Pronosticos() {
     }
   };
 
-  const getFlag = (nombre) =>
-    EQUIPOS.find((e) => e.nombre === nombre)?.bandera || "🏳️";
-
   return (
     <div className="page">
       {/* AI Header */}
@@ -90,34 +68,18 @@ function Pronosticos() {
 
       <h2 className="section-title">🎯 Simular partido</h2>
 
-      {/* Team selection */}
+      {/* Team selection — custom dropdowns with real flag images */}
       <div className="prediction-select-row">
-        <select
-          className="pred-select"
+        <EquipoSelector
           value={equipoA}
-          onChange={(e) => setEquipoA(e.target.value)}
-        >
-          <option value="">Selecciona equipo local</option>
-          {EQUIPOS.map((e) => (
-            <option key={e.nombre} value={e.nombre}>
-              {e.bandera} {e.nombre}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className="pred-select"
+          onChange={setEquipoA}
+          placeholder="Selecciona equipo local"
+        />
+        <EquipoSelector
           value={equipoB}
-          onChange={(e) => setEquipoB(e.target.value)}
-        >
-          <option value="">Selecciona equipo visitante</option>
-          {EQUIPOS.map((e) => (
-            <option key={e.nombre} value={e.nombre}>
-              {e.bandera} {e.nombre}
-            </option>
-          ))}
-        </select>
-
+          onChange={setEquipoB}
+          placeholder="Selecciona equipo visitante"
+        />
         <button className="predict-btn" onClick={obtenerPronostico}>
           🤖 Analizar con IA
         </button>
@@ -139,10 +101,14 @@ function Pronosticos() {
       {/* Prediction result */}
       {pronostico && (
         <div className="prediction-result">
-          {/* Score */}
+          {/* Score with real flag images */}
           <div className="pred-score-display">
             <div className="pred-team-block">
-              <span className="pred-flag">{getFlag(equipoA)}</span>
+              <img
+                src={`https://flagcdn.com/w40/${TEAM_FLAGS[equipoA]}.png`}
+                alt={equipoA}
+                className="pred-flag-img"
+              />
               <div className="pred-team-name">{equipoA}</div>
             </div>
             <div style={{ textAlign: "center" }}>
@@ -151,7 +117,11 @@ function Pronosticos() {
               <div className="pred-score-num">{pronostico.goles_b}</div>
             </div>
             <div className="pred-team-block">
-              <span className="pred-flag">{getFlag(equipoB)}</span>
+              <img
+                src={`https://flagcdn.com/w40/${TEAM_FLAGS[equipoB]}.png`}
+                alt={equipoB}
+                className="pred-flag-img"
+              />
               <div className="pred-team-name">{equipoB}</div>
             </div>
           </div>
