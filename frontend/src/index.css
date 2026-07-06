@@ -489,3 +489,95 @@
   display: block;
   margin: 0 auto 8px;
 }
+
+/* ══════════════════════════════════════
+   RESPONSIVE — small screens
+   ══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .navbar {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .navbar-logo {
+    font-size: 20px;
+  }
+
+  .navbar-links {
+    gap: 2px;
+  }
+
+  .navbar-links a {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  /* Page */
+  .page {
+    padding: 16px 12px;
+    gap: 20px;
+  }
+
+  /* Match card — apila verticalmente en celular */
+  .match-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .team {
+    justify-content: center;
+  }
+
+  .team.right {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .score-box {
+    order: -1; /* El marcador va primero */
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+  }
+
+  .score {
+    font-size: 28px;
+  }
+
+  /* Groups */
+  .group-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Scorers */
+  .scorer-bar {
+    display: none; /* Oculta la barra en celular */
+  }
+
+  /* Predictions */
+  .prediction-select-row {
+    flex-direction: column;
+  }
+
+  .predict-btn {
+    width: 100%;
+  }
+
+  .pred-score-display {
+    gap: 12px;
+  }
+
+  .pred-score-num {
+    font-size: 36px;
+  }
+
+  .pred-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
